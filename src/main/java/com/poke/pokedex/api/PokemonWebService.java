@@ -2,6 +2,7 @@ package com.poke.pokedex.api;
 
 import com.poke.pokedex.pojo.Pokemon;
 import com.poke.pokedex.service.PokemonService;
+import com.poke.pokedex.service.impl.PokemonServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,8 +12,13 @@ import java.util.List;
 @RequestMapping(ApiRegistration.REST_PREFIX + ApiRegistration.REST_POKEMON)
 public class PokemonWebService {
 
-    @Autowired
-    private PokemonService pokemonService;
+    // Dependency inversion (soliD) : utilisation d'une interface et pas directement d'une classe concrète
+    private final PokemonService pokemonService;
+
+    // Dependency injection
+    public PokemonWebService(PokemonService pokemonService) {
+        this.pokemonService = pokemonService;
+    }
 
     @GetMapping
     public List<Pokemon> getAllPokemon() {
