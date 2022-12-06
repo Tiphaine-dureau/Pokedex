@@ -10,7 +10,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
-public class SpringFoxConfig {
+public class SwaggerConfig {
     // On utilise le design pattern builder
     @Bean
     public Docket api() {
