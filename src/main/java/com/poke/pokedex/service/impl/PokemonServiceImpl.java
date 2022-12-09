@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-
 
 @Service
 public class PokemonServiceImpl implements PokemonService {
+    private final PokemonRepository pokemonRepository;
 
-    @Autowired
-    private PokemonRepository pokemonRepository;
+    public PokemonServiceImpl(PokemonRepository pokemonRepository) {
+        this.pokemonRepository = pokemonRepository;
+    }
 
     @Override
     public List<Pokemon> getAllPokemon() {

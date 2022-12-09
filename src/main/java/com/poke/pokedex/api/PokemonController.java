@@ -3,11 +3,11 @@ package com.poke.pokedex.api;
 import com.poke.pokedex.model.Pokemon;
 import com.poke.pokedex.service.PokemonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-
-@RestController
+@Controller
 @RequestMapping(ApiRegistration.REST_PREFIX + ApiRegistration.REST_POKEMON)
 public class PokemonController {
     @Autowired
@@ -20,8 +20,13 @@ public class PokemonController {
     }
 
     @GetMapping
-    public List<Pokemon> getAllPokemon() {
-        return pokemonService.getAllPokemon();
+    public ModelAndView getAllPokemon() {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("index.html");
+        modelAndView.addObject("test","test succes");
+        // Todo
+        return modelAndView;
+        //return pokemonService.getAllPokemon();
     }
 
     @GetMapping("{id}")

@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "Pokemon")
 public class Pokemon {
     @Id
     @SequenceGenerator(name = "pokemon_sequence", sequenceName = "pokemon_sequence", allocationSize = 1)
@@ -16,7 +17,6 @@ public class Pokemon {
     private Pokedex pokedex; // clé étrangère
 
     @OneToMany(mappedBy = "pokemon")
-    @JoinColumn
     private List<Ability> abilities;
 
     public Pokemon() {
