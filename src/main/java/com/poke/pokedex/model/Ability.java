@@ -1,5 +1,6 @@
 package com.poke.pokedex.model;
 
+import com.poke.pokedex.constraint.AbilityConstraint;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -12,6 +13,8 @@ public class Ability {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ability_sequence")
     @Column(name = "ability_id", updatable = false)
     private Long id;
+
+    @AbilityConstraint
     private String label;
     private Long powerful;
 

@@ -14,9 +14,6 @@ public class Pokemon {
     @Column(name = "pokemon_id", updatable = false)
     private Long id;
     private String surname;
-    @ManyToOne
-    @JoinColumn(name = "pokedex_id", nullable = false)
-    private Pokedex pokedex; // clé étrangère
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "pokemon_id")
