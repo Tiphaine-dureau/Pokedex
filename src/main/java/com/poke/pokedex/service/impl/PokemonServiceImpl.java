@@ -3,10 +3,8 @@ package com.poke.pokedex.service.impl;
 import com.poke.pokedex.model.Pokemon;
 import com.poke.pokedex.repository.PokemonRepository;
 import com.poke.pokedex.service.PokemonService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,8 +23,12 @@ public class PokemonServiceImpl implements PokemonService {
 
     @Override
     public Pokemon getPokemonById(Long id) {
-        Optional<Pokemon> pokemonOptional = pokemonRepository.findById(id);
-        return pokemonOptional.orElse(null);
+        if (checkId(id)) {
+            Optional<Pokemon> pokemonOptional = pokemonRepository.findById(id);
+            return pokemonOptional.orElse(null);
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -43,5 +45,9 @@ public class PokemonServiceImpl implements PokemonService {
     @Override
     public void deletePokemon(Long id) {
         pokemonRepository.deleteById(id);
+    }
+
+    private boolean checkId(Long id) {
+        return id != 0; // return true si id !=0 sinon false
     }
 }

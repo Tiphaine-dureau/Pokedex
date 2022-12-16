@@ -1,7 +1,9 @@
 package com.poke.pokedex.model;
 
 import javax.persistence.*;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Pokemon")
@@ -16,18 +18,19 @@ public class Pokemon {
     @JoinColumn(name = "pokedex_id", nullable = false)
     private Pokedex pokedex; // clé étrangère
 
-    @OneToMany(mappedBy = "pokemon")
-    private List<Ability> abilities;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "pokemon_id")
+    private Set<Ability> abilities = new LinkedHashSet<>();
 
     public Pokemon() {
     }
 
-    public Pokemon(String surname, List<Ability> abilities) {
+    public Pokemon(String surname, Set<Ability> abilities) {
         this.surname = surname;
         this.abilities = abilities;
     }
 
-    public Pokemon(Long id, String surname, List<Ability> abilities) {
+    public Pokemon(Long id, String surname, Set<Ability> abilities) {
         this.id = id;
         this.surname = surname;
         this.abilities = abilities;
@@ -49,11 +52,11 @@ public class Pokemon {
         this.surname = surname;
     }
 
-    public List<Ability> getAbilities() {
+    public Set<Ability> getAbilities() {
         return abilities;
     }
 
-    public void setAbilities(List<Ability> abilities) {
+    public void setAbilities(Set<Ability> abilities) {
         this.abilities = abilities;
     }
 }

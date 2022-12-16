@@ -10,21 +10,16 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping(ApiRegistration.REST_PREFIX + ApiRegistration.REST_POKEMON)
 public class PokemonController {
-    @Autowired
-    // Dependency inversion (soliD) : utilisation d'une interface et pas directement d'une classe concrète
-    private PokemonService pokemonService;
 
-    // Dependency injection
-    public PokemonController(PokemonService pokemonService) {
-        this.pokemonService = pokemonService;
-    }
+    // Dependency inversion (soliD) : utilisation d'une interface et pas directement d'une classe concrète
+    @Autowired
+    private PokemonService pokemonService;
 
     @GetMapping
     public ModelAndView getAllPokemon() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("index.html");
         modelAndView.addObject("test","test succes");
-        // Todo
         return modelAndView;
         //return pokemonService.getAllPokemon();
     }

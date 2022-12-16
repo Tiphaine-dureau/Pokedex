@@ -1,6 +1,9 @@
 package com.poke.pokedex.model;
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class Ability {
@@ -11,10 +14,6 @@ public class Ability {
     private Long id;
     private String label;
     private Long powerful;
-
-    @ManyToOne
-    @JoinColumn(name = "pokemon_id", nullable = false)
-    private Pokemon pokemon;
 
     public Ability() {
     }
@@ -52,5 +51,18 @@ public class Ability {
 
     public void setPowerful(Long powerful) {
         this.powerful = powerful;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || Hibernate.getClass(this) != Hibernate.getClass(object)) return false;
+        Ability ability = (Ability) object;
+        return id != null && Objects.equals(id,ability.id);
+    }
+
+    @Override
+    public int hashCode(){
+        return getClass().hashCode();
     }
 }
